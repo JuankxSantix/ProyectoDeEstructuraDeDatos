@@ -80,7 +80,7 @@ namespace ProyectoED
         }
         public Cnodo Buscar(string dato)//
         {
-            if (EstaVacia() == true)
+            if (EstaVacia())
                 return null;
             Trabajo2 = ancla;
 

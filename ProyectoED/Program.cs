@@ -109,20 +109,31 @@ namespace ProyectoED
                             ListasEnlazadas();
                             break;
                         case 4:
-                            Console.WriteLine("Esta seguro de Regresar S | N");
-                            Respuesta=Console.ReadLine();
+                            if (QuiereRegresar())
+                                Respuesta = "S";
                             break;
                         default:
                             Console.WriteLine("Error\nOpcion No encontrada");
                             break;
                     }
 
-                    if (Respuesta == "S" || Respuesta == "s")
+                    if (Respuesta == "S" )
                         break;
 
-                } while (Respuesta != "S" || Respuesta != "s");
+                } while (true);
                 
 
+
+            }
+            bool QuiereRegresar()
+            {
+                string Respuesta = "";
+                Console.WriteLine("Esta seguro de Regresar S | N");
+                Respuesta = Console.ReadLine();
+                if (Respuesta == "S" || Respuesta == "s")
+                    return true;
+                else
+                    return false;
 
             }
             void ListasEnlazadas()
@@ -166,8 +177,9 @@ namespace ProyectoED
                         case 3:
                             Console.Clear();
                             string dato = "";
-                            Console.WriteLine("antes de que dato deseas insertar");
+                            Console.WriteLine("Despues de que dato deseas insertar");
                             dato = Console.ReadLine();
+                            Console.WriteLine("Ingresa el dato que deseas insertar");
                             miLista.Insertar(dato, Console.ReadLine());
                             Console.Write("\nSe adiciono satisfacoriamente");
                             Console.ReadLine();
@@ -176,20 +188,28 @@ namespace ProyectoED
                             Console.Clear();
                             Console.WriteLine("Ingresa el dato a eliminar");
                             miLista.Borrar(Console.ReadLine());
-                            Console.Write("\nSe adiciono satisfacoriamente");
+                            Console.Write("\nSe elimino satisfacoriamente");
                             Console.ReadLine();
                             break;
                         case 5:
                             Console.Clear();
                             Console.WriteLine("Ingresa el dato a buscar");
                             //hrf
-                            Console.Write(miLista.Buscar(Console.ReadLine()));
+                            Console.Write(miLista.BuscarIndice(Console.ReadLine()));
                             Console.ReadLine();
                             break;
                         case 6:
                             Console.Clear();
-                            Console.WriteLine("Los elementos se veran separados por un salto de linea");
-                            miLista.Transversa();
+                            if (miLista.EstaVacia())
+                            {
+                                Console.WriteLine("La lista esta vacia");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Los elementos se veran separados por un salto de linea");
+                                miLista.Transversa();
+                            }
+                            
                             Console.ReadLine();
                             break;
                         case 7:
@@ -201,6 +221,10 @@ namespace ProyectoED
                                 miLista.Vaciar();
                             break;
                         case 8:
+                            if (QuiereRegresar())
+                                respuesta = 8;
+                            else
+                                respuesta = 0;
                             break;
                         default:
                             Console.WriteLine("Opcion no reconocida por favor verifique su respuesta");
@@ -208,13 +232,18 @@ namespace ProyectoED
                             break;
                     }
 
-                } while (respuesta != 8);
+                    if (respuesta == 8)
+                        break;
+
+                        
+
+                } while (true);
 
             }
             void Pilas()
             {
                 Console.Clear();
-                int opcion2 = 0;
+                int opcion;
                 int max;
                 int tope = 0;
 
@@ -225,8 +254,8 @@ namespace ProyectoED
                 {
                     Console.Clear();
                     Console.Write("1. Insertar un elemento\n2. Eliminar un elemento\n3. Mostrar Pila\n4. Salir\nOpcion: ");
-                    opcion2 = int.Parse(Console.ReadLine());
-                    switch (opcion2)
+                    opcion = int.Parse(Console.ReadLine());
+                    switch (opcion)
                     {
                         case 1:
                             Console.Clear();
@@ -239,7 +268,7 @@ namespace ProyectoED
                                 Console.WriteLine("Inserte el elemento: ");
                                 pila[tope] = Console.ReadLine();
                                 tope++;
-                                Console.WriteLine("\nEL ELEMENTO FUE AGREGADO");
+                                Console.WriteLine("\n..::: EL ELEMENTO FUE AGREGADO :::..");
                             }
                             Console.ReadLine();
                             break;
@@ -256,7 +285,6 @@ namespace ProyectoED
                                 Console.Write("Inserte el elemento que desea eliminar: ");
                                 eliminar = Console.ReadLine();
                                 for (int i = 0; i < max; i++)
-                                {
                                     if (pila[i] == eliminar)
                                     {
                                         encontrado = true;
@@ -264,7 +292,6 @@ namespace ProyectoED
                                         break;
                                     }
 
-                                }
                                 if (!encontrado)
                                 {
                                     Console.WriteLine("\nEL ELEMENTO {0} NO EXISTE DENTRO DE LA PILA", eliminar);
@@ -272,12 +299,12 @@ namespace ProyectoED
                                 else
                                 {
                                     for (int i = 0; i < max; i++)
-                                    
-                                        if (i == tope || i > tope)
-                                        
+                                    {
+                                        if (i >= tope)
+
                                             pila[i] = null;
-                                        
-                                    
+                                        break;
+                                    }
                                     Console.WriteLine("Elemento eliminado");
                                 }
                             }
@@ -286,17 +313,24 @@ namespace ProyectoED
                         case 3:
                             Console.Clear();
                             for (int i = 0; i < max; i++)
-                            
 
                                 Console.Write("{0} ", pila[i]);
                             
                             Console.ReadLine();
                             break;
+                        case 4:
+                            if (QuiereRegresar())
+                                opcion = 4;
+                            else
+                                opcion = 0;
+                            break;
                         default:
                             Console.Write("--Opcion no valida--");
                             break;
                     }
-                } while (opcion2 != 4);
+                    if (opcion == 4)
+                        break;
+                } while (true);
             }
             void Colas()
             {
@@ -372,9 +406,18 @@ namespace ProyectoED
                             Console.ReadLine();
                             break;
                         case 4:
+                            if (QuiereRegresar())
+                                opcion = 4;
+                            else
+                                opcion = 0;
+                            break;
+                        default:
+                            Console.Write("--Opcion no valida--");
                             break;
                     }
-                } while (opcion != 4);
+                    if (opcion == 4)
+                        break;
+                } while (true);
             }
 
         }

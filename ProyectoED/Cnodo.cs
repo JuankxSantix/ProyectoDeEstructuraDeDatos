@@ -20,7 +20,7 @@ namespace ProyectoED
         //Mejor imprecion
         public override string ToString()
         {
-            return string.Format("[{0}]",posicion);
+            return string.Format("[{0}]",dato);
         }
     }
 }
